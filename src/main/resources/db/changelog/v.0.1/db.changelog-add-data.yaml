@@ -1,0 +1,9 @@
+databaseChangeLog:
+  - changeSet:
+      id: 06042022-add-user
+      author: bogdan_lopatenko
+      changes:
+        sqlFile:
+          dbms: 'postgresql'
+          path: /db/changelog/v.0.1/sql-import/data.sql
+          stripComments: true

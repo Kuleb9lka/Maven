@@ -1,0 +1,91 @@
+databaseChangeLog:
+  - changeSet:
+      id: 07042022-create-user-table
+      author: bogdan_lopatenko
+      changes:
+        - createTable:
+            tableName: users
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: login
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: password
+                  type: varchar(50)
+              - column:
+                  name: role
+                  type: varchar(30)
+                  constraints:
+                    nullable: false
+  - changeSet:
+      id: 07042022-create-ticket-table
+      author: bogdan_lopatenko
+      changes:
+        - createTable:
+            tableName: tickets
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: user_id
+                  type: INT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: movie_id
+                  type: INT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: place
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: price
+                  type: INT
+                  constraints:
+                    nullanle: false
+              - column:
+                  name: is_bought
+                  type: boolean
+                  constraints:
+                    nullable: false
+  - changeSet:
+      id: 07042022-create-movie-table
+      author: bogdan_lopatenko
+      changes:
+        - createTable:
+            tableName: movies
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: date_time
+                  type: TIMESTAMP
+                  constraints:
+                    nullanle: false
