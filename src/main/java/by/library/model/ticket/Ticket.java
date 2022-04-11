@@ -1,5 +1,6 @@
 package by.library.model.ticket;
 
+import by.library.model.movie.Movie;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -22,7 +23,7 @@ public class Ticket {
     private int userId;
 
     @Column(name = "movie_id")
-    private int movieId;
+    private Movie movieId;
 
     @Column(name = "place")
     private int place;
