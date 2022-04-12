@@ -1,5 +1,6 @@
 package by.library.service;
 
+import by.library.dto.MovieDto;
 import by.library.model.movie.Movie;
 
 import java.util.List;
@@ -8,7 +9,7 @@ public interface MovieService {
 
     Movie get(Long id);
     List<Movie> getAll();
-    Movie create(Movie movie);
-    Movie update(Movie movie);
-    Movie delete(Movie movie);
+    Movie create(MovieDto movie);
+    Movie update(MovieDto movie);
+    void delete(Long id);
 }

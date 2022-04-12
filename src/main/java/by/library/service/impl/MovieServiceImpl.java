@@ -1,11 +1,11 @@
 package by.library.service.impl;
 
+import by.library.dto.MovieDto;
 import by.library.model.movie.Movie;
 import by.library.repository.MovieRepository;
 import by.library.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 import java.util.Optional;
@@ -35,26 +35,28 @@ public class MovieServiceImpl implements MovieService {
     }
 
     @Override
-    public Movie create(Movie movie) {
+    public Movie create(MovieDto movie) {
 
-        movieRepository.save(movie);
+        Movie movie1 = new Movie(movie.getName(), movie.getDateTime());
 
-        return movie;
+        movieRepository.save(movie1);
+
+        return movie1;
     }
 
     @Override
-    public Movie update(Movie movie) {
+    public Movie update(MovieDto movie) {
 
-        movieRepository.save(movie);
+        Movie movie1 = new Movie(movie.getId(), movie.getName(), movie.getDateTime());
 
-        return movie;
+        movieRepository.save(movie1);
+
+        return movie1;
     }
 
     @Override
-    public Movie delete(Movie movie) {
+    public void delete(Long id) {
 
-        movieRepository.delete(movie);
-
-        return movie;
+        movieRepository.deleteById(id);
     }
 }

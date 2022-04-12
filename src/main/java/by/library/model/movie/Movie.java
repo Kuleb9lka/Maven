@@ -5,11 +5,10 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 @Data
 @NoArgsConstructor
-@RequiredArgsConstructor
 @AllArgsConstructor
 @Entity
 @Table(name = "movies")
@@ -21,8 +20,13 @@ public class Movie implements Serializable {
     private Long id;
 
     @Column(name = "name")
-    @NonNull private String name;
+    private String name;
 
     @Column(name = "date_time")
-    @NonNull private Timestamp date;
+    private LocalDateTime date;
+
+    public Movie(String name, LocalDateTime date) {
+        this.name = name;
+        this.date = date;
+    }
 }

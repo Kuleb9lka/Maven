@@ -2,7 +2,6 @@ package by.library.controller;
 
 
 import by.library.dto.AuthenticationDto;
-import by.library.repository.UserRepository;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
