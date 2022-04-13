@@ -35,23 +35,23 @@ public class MovieServiceImpl implements MovieService {
     }
 
     @Override
-    public Movie create(MovieDto movie) {
+    public Movie create(MovieDto movieDto) {
 
-        Movie movie1 = new Movie(movie.getName(), movie.getDateTime());
+        Movie movie = new Movie(movieDto.getName(), movieDto.getDateTime());
 
-        movieRepository.save(movie1);
+        movieRepository.save(movie);
 
-        return movie1;
+        return movie;
     }
 
     @Override
-    public Movie update(MovieDto movie) {
+    public Movie update(MovieDto movieDto) {
 
-        Movie movie1 = new Movie(movie.getId(), movie.getName(), movie.getDateTime());
+        Movie movie = new Movie(movieDto.getId(), movieDto.getName(), movieDto.getDateTime());
 
-        movieRepository.save(movie1);
+        movieRepository.save(movie);
 
-        return movie1;
+        return movie;
     }
 
     @Override
