@@ -1,6 +1,6 @@
-package by.library.model.ticket;
+package by.library.model;
 
-import by.library.model.movie.Movie;
+import by.library.model.Movie;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

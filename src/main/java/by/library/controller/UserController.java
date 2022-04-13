@@ -1,6 +1,6 @@
 package by.library.controller;
 
-import by.library.model.user.User;
+import by.library.model.User;
 import by.library.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -12,7 +12,7 @@ import java.util.Optional;
 @RequestMapping("/users")
 public class UserController {
 
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
     @Autowired
     public UserController(UserRepository userRepository) {
@@ -31,18 +31,4 @@ public class UserController {
 
         return userRepository.findAll();
     }
-
-
-//    @GetMapping("/get-user")
-//    public User getUser(){
-//        return new User(1, "vasya", "dsfsdf", "sdfsdfsdf", "male", 12);
-//    }
-//
-//    @PostMapping("/save")
-//    public void addUser(@RequestBody User user){
-//
-//        System.out.println(user);
-//    }
-
-
 }

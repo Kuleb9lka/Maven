@@ -2,7 +2,7 @@ package by.library.controller;
 
 
 import by.library.dto.MovieDto;
-import by.library.model.movie.Movie;
+import by.library.model.Movie;
 import by.library.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -27,7 +27,6 @@ public class MovieController {
 
         return movieService.get(id);
     }
-
 
     @PostMapping
     public Movie create(@RequestBody MovieDto movie) {

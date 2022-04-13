@@ -1,10 +1,9 @@
 package by.library.service.impl;
 
 import by.library.dto.MovieDto;
-import by.library.model.movie.Movie;
+import by.library.model.Movie;
 import by.library.repository.MovieRepository;
 import by.library.service.MovieService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,7 +14,6 @@ public class MovieServiceImpl implements MovieService {
 
     private final MovieRepository movieRepository;
 
-    @Autowired
     public MovieServiceImpl(MovieRepository movieRepository) {
         this.movieRepository = movieRepository;
     }

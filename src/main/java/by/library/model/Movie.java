@@ -1,4 +1,4 @@
-package by.library.model.movie;
+package by.library.model;
 
 
 import lombok.*;

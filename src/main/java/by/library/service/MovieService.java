@@ -1,7 +1,7 @@
 package by.library.service;
 
 import by.library.dto.MovieDto;
-import by.library.model.movie.Movie;
+import by.library.model.Movie;
 
 import java.util.List;
 
