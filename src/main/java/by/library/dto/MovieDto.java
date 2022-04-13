@@ -1,0 +1,19 @@
+package by.library.dto;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.time.LocalDateTime;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class MovieDto {
+
+    private Long id;
+
+    private String name;
+
+    private LocalDateTime dateTime;
+}
