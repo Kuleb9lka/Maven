@@ -20,7 +20,7 @@ public class Ticket {
     private Long id;
 
     @Column(name = "user_id")
-    private int userId;
+    private User userId;
 
     @Column(name = "movie_id")
     private Movie movieId;
@@ -33,4 +33,12 @@ public class Ticket {
 
     @Column(name = "is_bought")
     private boolean isBought;
+
+    public Ticket(User userId, Movie movieId, int place, int price, boolean isBought) {
+        this.userId = userId;
+        this.movieId = movieId;
+        this.place = place;
+        this.price = price;
+        this.isBought = isBought;
+    }
 }
