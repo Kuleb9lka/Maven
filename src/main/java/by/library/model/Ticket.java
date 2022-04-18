@@ -19,8 +19,9 @@ public class Ticket {
     @Column(name = "id")
     private Long id;
 
+    @OneToOne(fetch = FetchType.LAZY)
     @Column(name = "user_id")
-    private User userId;
+    private User user;
 
     @Column(name = "movie_id")
     private Movie movieId;
