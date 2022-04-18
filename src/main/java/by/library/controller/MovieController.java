@@ -29,15 +29,19 @@ public class MovieController {
     }
 
     @PostMapping
-    public Movie create(@RequestBody MovieDto movie) {
+    public MovieDto create(@RequestBody MovieDto movieDto) {
 
-        return movieService.create(movie);
+        movieService.create(movieDto);
+
+        return movieDto;
     }
 
     @PutMapping
-    public Movie update(@RequestBody MovieDto movie){
+    public MovieDto update(@RequestBody MovieDto movieDto){
 
-        return movieService.update(movie);
+        movieService.update(movieDto);
+
+        return movieDto;
     }
 
     @DeleteMapping("/{id}")

@@ -29,15 +29,19 @@ public class TicketController {
     }
 
     @PostMapping
-    public Ticket create(@RequestBody TicketDto movie) {
+    public TicketDto create(@RequestBody TicketDto ticketDto) {
 
-        return ticketService.create(movie);
+        ticketService.create(ticketDto);
+
+        return ticketDto;
     }
 
     @PutMapping
-    public Ticket update(@RequestBody TicketDto movie){
+    public TicketDto update(@RequestBody TicketDto ticketDto){
 
-        return ticketService.update(movie);
+        ticketService.update(ticketDto);
+
+        return ticketDto;
     }
 
     @DeleteMapping("/{id}")
