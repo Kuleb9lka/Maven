@@ -1,7 +1,6 @@
 package by.library.controller;
 
-
-import by.library.dto.TicketDto;
+import by.library.dto.admin.AdminTicketDto;
 import by.library.model.Ticket;
 import by.library.service.TicketService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,31 +16,27 @@ public class TicketController {
     private TicketService ticketService;
 
     @GetMapping
-    public List<Ticket> getAll(){
+    public List<AdminTicketDto> getAll(){
 
         return ticketService.getAll();
     }
 
     @GetMapping("/{id}")
-    public Ticket get(@PathVariable Long id){
+    public AdminTicketDto get(@PathVariable Long id){
 
         return ticketService.get(id);
     }
 
     @PostMapping
-    public TicketDto create(@RequestBody TicketDto ticketDto) {
+    public AdminTicketDto create(@RequestBody AdminTicketDto adminTicketDto) {
 
-        ticketService.create(ticketDto);
-
-        return ticketDto;
+        return ticketService.create(adminTicketDto);
     }
 
     @PutMapping
-    public TicketDto update(@RequestBody TicketDto ticketDto){
+    public AdminTicketDto update(@RequestBody AdminTicketDto adminTicketDto){
 
-        ticketService.update(ticketDto);
-
-        return ticketDto;
+        return ticketService.update(adminTicketDto);
     }
 
     @DeleteMapping("/{id}")

@@ -1,11 +1,12 @@
 package by.library.service.impl;
 
-import by.library.dto.UserDto;
+import by.library.dto.admin.AdminUserDto;
 import by.library.model.User;
 import by.library.repository.UserRepository;
 import by.library.service.UserService;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,38 +20,51 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User get(Long id) {
+    public AdminUserDto get(Long id) {
 
         Optional<User> optionalUser = userRepository.findById(id);
 
-        return optionalUser.get();
+        AdminUserDto adminUserDto = new AdminUserDto(optionalUser.get().getId(), optionalUser.get().getLogin(),
+                optionalUser.get().getPassword(), optionalUser.get().getRole());
+
+        return adminUserDto;
     }
 
     @Override
-    public List<User> getAll() {
+    public List<AdminUserDto> getAll() {
 
-        return userRepository.findAll();
+        List<AdminUserDto> dtoList = new ArrayList<>();
+
+        for (User user : userRepository.findAll()) {
+
+            AdminUserDto adminUserDto = new AdminUserDto(user.getId(), user.getLogin(),
+                     user.getPassword(), user.getRole());
+
+            dtoList.add(adminUserDto);
+        }
+
+        return dtoList;
     }
 
     @Override
-    public User create(UserDto userDto) {
+    public AdminUserDto create(AdminUserDto adminUserDto) {
 
-        User user = new User(userDto.getId(), userDto.getLogin(),
-                userDto.getPassword(), userDto.getRole());
+        User user = new User(adminUserDto.getId(), adminUserDto.getLogin(),
+                adminUserDto.getPassword(), adminUserDto.getRole());
 
         userRepository.save(user);
 
-        return user;
+        return adminUserDto;
     }
 
     @Override
-    public User update(UserDto userDto) {
+    public AdminUserDto update(AdminUserDto adminUserDto) {
 
-        User user = new User(userDto.getLogin(), userDto.getPassword(), userDto.getRole());
+        User user = new User(adminUserDto.getId(), adminUserDto.getLogin(), adminUserDto.getPassword(), adminUserDto.getRole());
 
         userRepository.save(user);
 
-        return user;
+        return adminUserDto;
     }
 
     @Override

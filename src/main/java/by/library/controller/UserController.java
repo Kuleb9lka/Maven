@@ -1,11 +1,12 @@
 package by.library.controller;
 
-import by.library.dto.UserDto;
+import by.library.dto.admin.AdminUserDto;
 import by.library.model.User;
 import by.library.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -16,31 +17,27 @@ public class UserController {
     private UserServiceImpl userService;
 
     @GetMapping
-    public List<User> getAll(){
+    public List<AdminUserDto> getAll(){
 
         return userService.getAll();
     }
 
     @GetMapping("/{id}")
-    public User get(@PathVariable Long id){
+    public AdminUserDto get(@PathVariable Long id){
 
         return userService.get(id);
     }
 
     @PostMapping
-    public UserDto create(@RequestBody UserDto userDto) {
+    public AdminUserDto create(@RequestBody AdminUserDto adminUserDto) {
 
-        userService.create(userDto);
-
-        return userDto;
+        return userService.create(adminUserDto);
     }
 
     @PutMapping
-    public UserDto update(@RequestBody UserDto userDto){
+    public AdminUserDto update(@RequestBody AdminUserDto adminUserDto){
 
-        userService.update(userDto);
-
-        return userDto;
+        return userService.update(adminUserDto);
     }
 
     @DeleteMapping("/{id}")

@@ -1,4 +1,4 @@
-package by.library.dto;
+package by.library.dto.admin;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class MovieDto {
+public class AdminMovieDto {
 
     private Long id;
 

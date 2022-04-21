@@ -1,11 +1,12 @@
 package by.library.service.impl;
 
-import by.library.dto.MovieDto;
+import by.library.dto.admin.AdminMovieDto;
 import by.library.model.Movie;
 import by.library.repository.MovieRepository;
 import by.library.service.MovieService;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,37 +20,50 @@ public class MovieServiceImpl implements MovieService {
     }
 
     @Override
-    public Movie get(Long id) {
+    public AdminMovieDto get(Long id) {
 
         Optional<Movie> optionalMovie = movieRepository.findById(id);
 
-        return optionalMovie.get();
+        AdminMovieDto adminMovieDto = new AdminMovieDto(optionalMovie.get().getId(),
+                optionalMovie.get().getName(), optionalMovie.get().getDate());
+
+        return adminMovieDto;
     }
 
     @Override
-    public List<Movie> getAll() {
+    public List<AdminMovieDto> getAll() {
 
-        return movieRepository.findAll();
+        List<AdminMovieDto> dtoList = new ArrayList<>();
+
+        for (Movie movie : movieRepository.findAll()) {
+
+            AdminMovieDto movieDto = new AdminMovieDto(movie.getId(), movie.getName(),
+                    movie.getDate());
+
+            dtoList.add(movieDto);
+        }
+
+        return dtoList;
     }
 
     @Override
-    public Movie create(MovieDto movieDto) {
+    public AdminMovieDto create(AdminMovieDto adminMovieDto) {
 
-        Movie movie = new Movie(movieDto.getName(), movieDto.getDateTime());
+        Movie movie = new Movie(adminMovieDto.getName(), adminMovieDto.getDateTime());
 
         movieRepository.save(movie);
 
-        return movie;
+        return adminMovieDto;
     }
 
     @Override
-    public Movie update(MovieDto movieDto) {
+    public AdminMovieDto update(AdminMovieDto adminMovieDto) {
 
-        Movie movie = new Movie(movieDto.getId(), movieDto.getName(), movieDto.getDateTime());
+        Movie movie = new Movie(adminMovieDto.getId(), adminMovieDto.getName(), adminMovieDto.getDateTime());
 
         movieRepository.save(movie);
 
-        return movie;
+        return adminMovieDto;
     }
 
     @Override

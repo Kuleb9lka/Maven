@@ -1,4 +1,4 @@
-package by.library.dto;
+package by.library.dto.admin;
 
 
 import by.library.model.Movie;
@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class TicketDto {
+public class AdminTicketDto {
 
     private Long id;
 

@@ -1,6 +1,6 @@
 server:
   port: 8081
-  servlet: #!!!
+  servlet:
     context-path: /api
 spring:
   mvc:
@@ -8,11 +8,13 @@ spring:
       matching-strategy: ant_path_matcher
 
   jpa:
+    open-in-view: true
     show-sql: true
     hibernate:
-      ddl-auto:  #!!!validate
+      ddl-auto:
     properties:
       dialect: dialect=org.hibernate.dialect.SQLServerDialect
+
 
   datasource:
     driver-class-name: org.postgresql.Driver

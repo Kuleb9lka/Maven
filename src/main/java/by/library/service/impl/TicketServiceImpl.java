@@ -1,12 +1,13 @@
 package by.library.service.impl;
 
 
-import by.library.dto.TicketDto;
+import by.library.dto.admin.AdminTicketDto;
 import by.library.model.Ticket;
 import by.library.repository.TicketRepository;
 import by.library.service.TicketService;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,39 +21,53 @@ public class TicketServiceImpl implements TicketService {
     }
 
     @Override
-    public Ticket get(Long id) {
+    public AdminTicketDto get(Long id) {
 
         Optional<Ticket> optionalTicket = ticketRepository.findById(id);
 
-        return optionalTicket.get();
+        AdminTicketDto adminTicketDto = new AdminTicketDto(optionalTicket.get().getId(),
+                optionalTicket.get().getUser(), optionalTicket.get().getMovie(), optionalTicket.get().getPlace(),
+                optionalTicket.get().getPrice(), optionalTicket.get().isBought());
+
+        return adminTicketDto;
     }
 
     @Override
-    public List<Ticket> getAll() {
+    public List<AdminTicketDto> getAll() {
 
-        return ticketRepository.findAll();
+        List<AdminTicketDto> dtoList = new ArrayList<>();
+
+        for (Ticket ticket : ticketRepository.findAll()) {
+
+            AdminTicketDto adminTicketDto = new AdminTicketDto(ticket.getId(), ticket.getUser(),
+                    ticket.getMovie(), ticket.getPlace(), ticket.getPrice(), ticket.isBought());
+
+            dtoList.add(adminTicketDto);
+        }
+
+        return dtoList;
     }
 
     @Override
-    public Ticket create(TicketDto ticketDto) {
+    public AdminTicketDto create(AdminTicketDto adminTicketDto) {
 
-        Ticket ticket = new Ticket(ticketDto.getUserId(), ticketDto.getMovieId(),
-                ticketDto.getPlace(), ticketDto.getPrice(), ticketDto.isBought());
+        Ticket ticket = new Ticket(adminTicketDto.getUserId(), adminTicketDto.getMovieId(),
+                adminTicketDto.getPlace(), adminTicketDto.getPrice(), adminTicketDto.isBought());
 
         ticketRepository.save(ticket);
 
-        return ticket;
+        return adminTicketDto;
     }
 
     @Override
-    public Ticket update(TicketDto ticketDto) {
+    public AdminTicketDto update(AdminTicketDto adminTicketDto) {
 
-        Ticket ticket = new Ticket(ticketDto.getId(), ticketDto.getUserId(), ticketDto.getMovieId(),
-                ticketDto.getPlace(), ticketDto.getPrice(), ticketDto.isBought());
+        Ticket ticket = new Ticket(adminTicketDto.getId(), adminTicketDto.getUserId(), adminTicketDto.getMovieId(),
+                adminTicketDto.getPlace(), adminTicketDto.getPrice(), adminTicketDto.isBought());
 
         ticketRepository.save(ticket);
 
-        return ticket;
+        return adminTicketDto;
     }
 
     @Override

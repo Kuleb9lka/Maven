@@ -1,12 +1,13 @@
 package by.library.controller;
 
 
-import by.library.dto.MovieDto;
+import by.library.dto.admin.AdminMovieDto;
 import by.library.model.Movie;
 import by.library.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -17,31 +18,27 @@ public class MovieController {
     private MovieService movieService;
 
     @GetMapping
-    public List<Movie> getAll(){
+    public List<AdminMovieDto> getAll(){
 
         return movieService.getAll();
     }
 
     @GetMapping("/{id}")
-    public Movie get(@PathVariable Long id){
+    public AdminMovieDto get(@PathVariable Long id){
 
         return movieService.get(id);
     }
 
     @PostMapping
-    public MovieDto create(@RequestBody MovieDto movieDto) {
+    public AdminMovieDto create(@RequestBody AdminMovieDto adminMovieDto) {
 
-        movieService.create(movieDto);
-
-        return movieDto;
+        return movieService.create(adminMovieDto);
     }
 
     @PutMapping
-    public MovieDto update(@RequestBody MovieDto movieDto){
+    public AdminMovieDto update(@RequestBody AdminMovieDto adminMovieDto){
 
-        movieService.update(movieDto);
-
-        return movieDto;
+        return movieService.update(adminMovieDto);
     }
 
     @DeleteMapping("/{id}")
