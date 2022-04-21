@@ -1,5 +1,6 @@
 package by.library.controller;
 
+
 import by.library.dto.admin.AdminTicketDto;
 import by.library.model.Ticket;
 import by.library.service.TicketService;
@@ -16,6 +17,7 @@ public class TicketController {
     private TicketService ticketService;
 
     @GetMapping
+
     public List<AdminTicketDto> getAll(){
 
         return ticketService.getAll();
@@ -37,6 +39,7 @@ public class TicketController {
     public AdminTicketDto update(@RequestBody AdminTicketDto adminTicketDto){
 
         return ticketService.update(adminTicketDto);
+
     }
 
     @DeleteMapping("/{id}")
