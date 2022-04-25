@@ -1,6 +1,7 @@
 package by.library.service.impl;
 
 import by.library.dto.admin.AdminTicketDto;
+import by.library.mapper.admin.AdminTicketMapper;
 import by.library.model.Ticket;
 import by.library.repository.TicketRepository;
 import by.library.service.TicketService;
@@ -24,11 +25,7 @@ public class TicketServiceImpl implements TicketService {
 
         Optional<Ticket> optionalTicket = ticketRepository.findById(id);
 
-        AdminTicketDto adminTicketDto = new AdminTicketDto(optionalTicket.get().getId(),
-                optionalTicket.get().getUser(), optionalTicket.get().getMovie(), optionalTicket.get().getPlace(),
-                optionalTicket.get().getPrice(), optionalTicket.get().isBought());
-
-        return adminTicketDto;
+        return AdminTicketMapper.INSTANCE.toDto(optionalTicket.get());
     }
 
     @Override
@@ -38,35 +35,32 @@ public class TicketServiceImpl implements TicketService {
 
         for (Ticket ticket : ticketRepository.findAll()) {
 
-            AdminTicketDto adminTicketDto = new AdminTicketDto(ticket.getId(), ticket.getUser(),
-                    ticket.getMovie(), ticket.getPlace(), ticket.getPrice(), ticket.isBought());
+            AdminTicketDto ticketDto = AdminTicketMapper.INSTANCE.toDto(ticket);
 
-            dtoList.add(adminTicketDto);
+            dtoList.add(ticketDto);
         }
 
         return dtoList;
     }
 
     @Override
-    public AdminTicketDto create(AdminTicketDto adminTicketDto) {
+    public AdminTicketDto create(AdminTicketDto ticketDto) {
 
-        Ticket ticket = new Ticket(adminTicketDto.getUserId(), adminTicketDto.getMovieId(),
-                adminTicketDto.getPlace(), adminTicketDto.getPrice(), adminTicketDto.isBought());
+        Ticket ticket = AdminTicketMapper.INSTANCE.toEntity(ticketDto);
 
         ticketRepository.save(ticket);
 
-        return adminTicketDto;
+        return ticketDto;
     }
 
     @Override
-    public AdminTicketDto update(AdminTicketDto adminTicketDto) {
+    public AdminTicketDto update(AdminTicketDto ticketDto) {
 
-        Ticket ticket = new Ticket(adminTicketDto.getId(), adminTicketDto.getUserId(), adminTicketDto.getMovieId(),
-                adminTicketDto.getPlace(), adminTicketDto.getPrice(), adminTicketDto.isBought());
+        Ticket ticket = AdminTicketMapper.INSTANCE.toEntity(ticketDto);
 
         ticketRepository.save(ticket);
 
-        return adminTicketDto;
+        return ticketDto;
     }
 
     @Override

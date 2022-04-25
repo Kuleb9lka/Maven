@@ -2,12 +2,10 @@ package by.library.controller;
 
 
 import by.library.dto.admin.AdminMovieDto;
-import by.library.model.Movie;
 import by.library.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -30,15 +28,15 @@ public class MovieController {
     }
 
     @PostMapping
-    public AdminMovieDto create(@RequestBody AdminMovieDto adminMovieDto) {
+    public AdminMovieDto create(@RequestBody AdminMovieDto movieDto) {
 
-        return movieService.create(adminMovieDto);
+        return movieService.create(movieDto);
     }
 
     @PutMapping
-    public AdminMovieDto update(@RequestBody AdminMovieDto adminMovieDto){
+    public AdminMovieDto update(@RequestBody AdminMovieDto movieDto){
 
-        return movieService.update(adminMovieDto);
+        return movieService.update(movieDto);
     }
 
     @DeleteMapping("/{id}")

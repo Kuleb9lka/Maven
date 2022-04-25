@@ -34,12 +34,4 @@ public class Ticket {
 
     @Column(name = "is_bought")
     private boolean isBought;
-
-    public Ticket(User user, Movie movie, int place, int price, boolean isBought) {
-        this.user = user;
-        this.movie = movie;
-        this.place = place;
-        this.price = price;
-        this.isBought = isBought;
-    }
 }

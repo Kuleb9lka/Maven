@@ -1,6 +1,7 @@
 package by.library.service.impl;
 
 import by.library.dto.admin.AdminMovieDto;
+import by.library.mapper.admin.AdminMovieMapper;
 import by.library.model.Movie;
 import by.library.repository.MovieRepository;
 import by.library.service.MovieService;
@@ -24,10 +25,7 @@ public class MovieServiceImpl implements MovieService {
 
         Optional<Movie> optionalMovie = movieRepository.findById(id);
 
-        AdminMovieDto adminMovieDto = new AdminMovieDto(optionalMovie.get().getId(),
-                optionalMovie.get().getName(), optionalMovie.get().getDate());
-
-        return adminMovieDto;
+        return AdminMovieMapper.INSTANCE.toDto(optionalMovie.get());
     }
 
     @Override
@@ -37,8 +35,7 @@ public class MovieServiceImpl implements MovieService {
 
         for (Movie movie : movieRepository.findAll()) {
 
-            AdminMovieDto movieDto = new AdminMovieDto(movie.getId(), movie.getName(),
-                    movie.getDate());
+            AdminMovieDto movieDto = AdminMovieMapper.INSTANCE.toDto(movie);
 
             dtoList.add(movieDto);
         }
@@ -49,7 +46,7 @@ public class MovieServiceImpl implements MovieService {
     @Override
     public AdminMovieDto create(AdminMovieDto adminMovieDto) {
 
-        Movie movie = new Movie(adminMovieDto.getName(), adminMovieDto.getDateTime());
+        Movie movie = AdminMovieMapper.INSTANCE.toEntity(adminMovieDto);
 
         movieRepository.save(movie);
 
@@ -59,7 +56,7 @@ public class MovieServiceImpl implements MovieService {
     @Override
     public AdminMovieDto update(AdminMovieDto adminMovieDto) {
 
-        Movie movie = new Movie(adminMovieDto.getId(), adminMovieDto.getName(), adminMovieDto.getDateTime());
+        Movie movie = AdminMovieMapper.INSTANCE.toEntity(adminMovieDto);
 
         movieRepository.save(movie);
 

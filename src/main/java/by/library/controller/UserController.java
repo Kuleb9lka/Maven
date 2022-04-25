@@ -1,12 +1,10 @@
 package by.library.controller;
 
 import by.library.dto.admin.AdminUserDto;
-import by.library.model.User;
 import by.library.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -29,15 +27,15 @@ public class UserController {
     }
 
     @PostMapping
-    public AdminUserDto create(@RequestBody AdminUserDto adminUserDto) {
+    public AdminUserDto create(@RequestBody AdminUserDto userDto) {
 
-        return userService.create(adminUserDto);
+        return userService.create(userDto);
     }
 
     @PutMapping
-    public AdminUserDto update(@RequestBody AdminUserDto adminUserDto){
+    public AdminUserDto update(@RequestBody AdminUserDto userDto){
 
-        return userService.update(adminUserDto);
+        return userService.update(userDto);
     }
 
     @DeleteMapping("/{id}")

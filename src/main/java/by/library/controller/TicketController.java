@@ -2,7 +2,6 @@ package by.library.controller;
 
 
 import by.library.dto.admin.AdminTicketDto;
-import by.library.model.Ticket;
 import by.library.service.TicketService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -30,16 +29,15 @@ public class TicketController {
     }
 
     @PostMapping
-    public AdminTicketDto create(@RequestBody AdminTicketDto adminTicketDto) {
+    public AdminTicketDto create(@RequestBody AdminTicketDto ticketDto) {
 
-        return ticketService.create(adminTicketDto);
+        return ticketService.create(ticketDto);
     }
 
     @PutMapping
-    public AdminTicketDto update(@RequestBody AdminTicketDto adminTicketDto){
+    public AdminTicketDto update(@RequestBody AdminTicketDto ticketDto){
 
-        return ticketService.update(adminTicketDto);
-
+        return ticketService.update(ticketDto);
     }
 
     @DeleteMapping("/{id}")

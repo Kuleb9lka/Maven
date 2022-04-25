@@ -14,9 +14,9 @@ public class AdminTicketDto {
 
     private Long id;
 
-    private User userId;
+    private User user;
 
-    private Movie movieId;
+    private Movie movie;
 
     private int place;
 

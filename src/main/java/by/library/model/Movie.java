@@ -23,10 +23,6 @@ public class Movie implements Serializable {
     private String name;
 
     @Column(name = "date_time")
-    private LocalDateTime date;
+    private LocalDateTime dateTime;
 
-    public Movie(String name, LocalDateTime date) {
-        this.name = name;
-        this.date = date;
-    }
 }

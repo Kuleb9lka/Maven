@@ -1,6 +1,7 @@
 package by.library.service.impl;
 
 import by.library.dto.admin.AdminUserDto;
+import by.library.mapper.admin.AdminUserMapper;
 import by.library.model.User;
 import by.library.repository.UserRepository;
 import by.library.service.UserService;
@@ -24,10 +25,7 @@ public class UserServiceImpl implements UserService {
 
         Optional<User> optionalUser = userRepository.findById(id);
 
-        AdminUserDto adminUserDto = new AdminUserDto(optionalUser.get().getId(), optionalUser.get().getLogin(),
-                optionalUser.get().getPassword(), optionalUser.get().getRole());
-
-        return adminUserDto;
+        return AdminUserMapper.INSTANCE.toDto(optionalUser.get());
     }
 
     @Override
@@ -37,8 +35,7 @@ public class UserServiceImpl implements UserService {
 
         for (User user : userRepository.findAll()) {
 
-            AdminUserDto adminUserDto = new AdminUserDto(user.getId(), user.getLogin(),
-                     user.getPassword(), user.getRole());
+            AdminUserDto adminUserDto = AdminUserMapper.INSTANCE.toDto(user);
 
             dtoList.add(adminUserDto);
         }
@@ -47,24 +44,23 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public AdminUserDto create(AdminUserDto adminUserDto) {
+    public AdminUserDto create(AdminUserDto userDto) {
 
-        User user = new User(adminUserDto.getId(), adminUserDto.getLogin(),
-                adminUserDto.getPassword(), adminUserDto.getRole());
+        User user = AdminUserMapper.INSTANCE.toEntity(userDto);
 
         userRepository.save(user);
 
-        return adminUserDto;
+        return userDto;
     }
 
     @Override
-    public AdminUserDto update(AdminUserDto adminUserDto) {
+    public AdminUserDto update(AdminUserDto userDto) {
 
-        User user = new User(adminUserDto.getId(), adminUserDto.getLogin(), adminUserDto.getPassword(), adminUserDto.getRole());
+        User user = AdminUserMapper.INSTANCE.toEntity(userDto);
 
         userRepository.save(user);
 
-        return adminUserDto;
+        return userDto;
     }
 
     @Override
