@@ -23,6 +23,6 @@ public class Movie implements Serializable {
     private String name;
 
     @Column(name = "date_time")
-    private LocalDateTime dateTime;
+    private LocalDateTime sessionDateTime;
 
 }

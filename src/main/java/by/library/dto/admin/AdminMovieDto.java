@@ -15,5 +15,5 @@ public class AdminMovieDto {
 
     private String name;
 
-    private LocalDateTime dateTime;
+    private LocalDateTime sessionDateTime;
 }

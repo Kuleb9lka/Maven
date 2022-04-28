@@ -14,5 +14,5 @@ public class UserMovieDto {
 
     private String name;
 
-    private LocalDateTime dateTime;
+    private LocalDateTime sessionDateTime;
 }

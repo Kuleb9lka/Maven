@@ -11,7 +11,7 @@ spring:
     open-in-view: true
     show-sql: true
     hibernate:
-      ddl-auto:
+      ddl-auto: update
     properties:
       dialect: dialect=org.hibernate.dialect.SQLServerDialect
 
