@@ -1,6 +1,6 @@
 package by.library.controller;
 
-import by.library.dto.admin.AdminUserDto;
+import by.library.dto.admin.UserDtoForAdmin;
 import by.library.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -15,25 +15,25 @@ public class UserController {
     private UserServiceImpl userService;
 
     @GetMapping
-    public List<AdminUserDto> getAll(){
+    public List<UserDtoForAdmin> getAll(){
 
         return userService.getAll();
     }
 
     @GetMapping("/{id}")
-    public AdminUserDto get(@PathVariable Long id){
+    public UserDtoForAdmin get(@PathVariable Long id){
 
         return userService.get(id);
     }
 
     @PostMapping
-    public AdminUserDto create(@RequestBody AdminUserDto userDto) {
+    public UserDtoForAdmin create(@RequestBody UserDtoForAdmin userDto) {
 
         return userService.create(userDto);
     }
 
     @PutMapping
-    public AdminUserDto update(@RequestBody AdminUserDto userDto){
+    public UserDtoForAdmin update(@RequestBody UserDtoForAdmin userDto){
 
         return userService.update(userDto);
     }

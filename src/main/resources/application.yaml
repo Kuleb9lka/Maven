@@ -11,10 +11,9 @@ spring:
     open-in-view: true
     show-sql: true
     hibernate:
-      ddl-auto: update
+      ddl-auto: none
     properties:
       dialect: dialect=org.hibernate.dialect.SQLServerDialect
-
 
   datasource:
     driver-class-name: org.postgresql.Driver

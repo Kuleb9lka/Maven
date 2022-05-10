@@ -1,66 +1,55 @@
 package by.library.service.impl;
 
-import by.library.dto.admin.AdminMovieDto;
+import by.library.dto.admin.MovieDtoForAdmin;
+import by.library.exception.MovieNotFoundException;
 import by.library.mapper.admin.AdminMovieMapper;
+import by.library.mapper.list.MovieListMapper;
 import by.library.model.Movie;
 import by.library.repository.MovieRepository;
 import by.library.service.MovieService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class MovieServiceImpl implements MovieService {
 
     private final MovieRepository movieRepository;
 
-    public MovieServiceImpl(MovieRepository movieRepository) {
-        this.movieRepository = movieRepository;
+    @Override
+    public MovieDtoForAdmin get(Long id) {
+
+        Movie movie = movieRepository.findById(id).orElseThrow(() -> new MovieNotFoundException("No such movie"));
+
+        return AdminMovieMapper.INSTANCE.toDto(movie);
     }
 
     @Override
-    public AdminMovieDto get(Long id) {
+    public List<MovieDtoForAdmin> getAll() {
 
-        Optional<Movie> optionalMovie = movieRepository.findById(id);
-
-        return AdminMovieMapper.INSTANCE.toDto(optionalMovie.get());
+        return MovieListMapper.INSTANCE.toDtoList(movieRepository.findAll());
     }
 
     @Override
-    public List<AdminMovieDto> getAll() {
+    public MovieDtoForAdmin create(MovieDtoForAdmin movieDtoForAdmin) {
 
-        List<AdminMovieDto> dtoList = new ArrayList<>();
-
-        for (Movie movie : movieRepository.findAll()) {
-
-            AdminMovieDto movieDto = AdminMovieMapper.INSTANCE.toDto(movie);
-
-            dtoList.add(movieDto);
-        }
-
-        return dtoList;
-    }
-
-    @Override
-    public AdminMovieDto create(AdminMovieDto adminMovieDto) {
-
-        Movie movie = AdminMovieMapper.INSTANCE.toEntity(adminMovieDto);
+        Movie movie = AdminMovieMapper.INSTANCE.toEntity(movieDtoForAdmin);
 
         movieRepository.save(movie);
 
-        return adminMovieDto;
+        return AdminMovieMapper.INSTANCE.toDto(movie);
     }
 
     @Override
-    public AdminMovieDto update(AdminMovieDto adminMovieDto) {
+    public MovieDtoForAdmin update(MovieDtoForAdmin movieDtoForAdmin) {
 
-        Movie movie = AdminMovieMapper.INSTANCE.toEntity(adminMovieDto);
+        Movie movie = AdminMovieMapper.INSTANCE.toEntity(movieDtoForAdmin);
 
         movieRepository.save(movie);
 
-        return adminMovieDto;
+        return AdminMovieMapper.INSTANCE.toDto(movie);
     }
 
     @Override

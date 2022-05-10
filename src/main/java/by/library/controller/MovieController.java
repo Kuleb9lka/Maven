@@ -1,7 +1,7 @@
 package by.library.controller;
 
 
-import by.library.dto.admin.AdminMovieDto;
+import by.library.dto.admin.MovieDtoForAdmin;
 import by.library.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -16,25 +16,25 @@ public class MovieController {
     private MovieService movieService;
 
     @GetMapping
-    public List<AdminMovieDto> getAll(){
+    public List<MovieDtoForAdmin> getAll(){
 
         return movieService.getAll();
     }
 
     @GetMapping("/{id}")
-    public AdminMovieDto get(@PathVariable Long id){
+    public MovieDtoForAdmin get(@PathVariable Long id){
 
         return movieService.get(id);
     }
 
     @PostMapping
-    public AdminMovieDto create(@RequestBody AdminMovieDto movieDto) {
+    public MovieDtoForAdmin create(@RequestBody MovieDtoForAdmin movieDto) {
 
         return movieService.create(movieDto);
     }
 
     @PutMapping
-    public AdminMovieDto update(@RequestBody AdminMovieDto movieDto){
+    public MovieDtoForAdmin update(@RequestBody MovieDtoForAdmin movieDto){
 
         return movieService.update(movieDto);
     }

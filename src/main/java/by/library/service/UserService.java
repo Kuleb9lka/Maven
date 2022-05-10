@@ -1,14 +1,14 @@
 package by.library.service;
 
-import by.library.dto.admin.AdminUserDto;
+import by.library.dto.admin.UserDtoForAdmin;
 
 import java.util.List;
 
 public interface UserService {
 
-    AdminUserDto get(Long id);
-    List<AdminUserDto> getAll();
-    AdminUserDto create(AdminUserDto adminUserDto);
-    AdminUserDto update(AdminUserDto adminUserDto);
+    UserDtoForAdmin get(Long id);
+    List<UserDtoForAdmin> getAll();
+    UserDtoForAdmin create(UserDtoForAdmin userDtoForAdmin);
+    UserDtoForAdmin update(UserDtoForAdmin userDtoForAdmin);
     void delete(Long id);
 }

@@ -1,66 +1,55 @@
 package by.library.service.impl;
 
-import by.library.dto.admin.AdminUserDto;
+import by.library.dto.admin.UserDtoForAdmin;
+import by.library.exception.UserNotFoundException;
 import by.library.mapper.admin.AdminUserMapper;
+import by.library.mapper.list.UserListMapper;
 import by.library.model.User;
 import by.library.repository.UserRepository;
 import by.library.service.UserService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
 
-    public UserServiceImpl(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    @Override
+    public UserDtoForAdmin get(Long id) {
+
+        User user = userRepository.findById(id).orElseThrow(() -> new UserNotFoundException("No such user"));
+
+        return AdminUserMapper.INSTANCE.toDto(user);
     }
 
     @Override
-    public AdminUserDto get(Long id) {
+    public List<UserDtoForAdmin> getAll() {
 
-        Optional<User> optionalUser = userRepository.findById(id);
-
-        return AdminUserMapper.INSTANCE.toDto(optionalUser.get());
+        return UserListMapper.INSTANCE.toDtoList(userRepository.findAll());
     }
 
     @Override
-    public List<AdminUserDto> getAll() {
-
-        List<AdminUserDto> dtoList = new ArrayList<>();
-
-        for (User user : userRepository.findAll()) {
-
-            AdminUserDto adminUserDto = AdminUserMapper.INSTANCE.toDto(user);
-
-            dtoList.add(adminUserDto);
-        }
-
-        return dtoList;
-    }
-
-    @Override
-    public AdminUserDto create(AdminUserDto userDto) {
+    public UserDtoForAdmin create(UserDtoForAdmin userDto) {
 
         User user = AdminUserMapper.INSTANCE.toEntity(userDto);
 
         userRepository.save(user);
 
-        return userDto;
+        return AdminUserMapper.INSTANCE.toDto(user);
     }
 
     @Override
-    public AdminUserDto update(AdminUserDto userDto) {
+    public UserDtoForAdmin update(UserDtoForAdmin userDto) {
 
         User user = AdminUserMapper.INSTANCE.toEntity(userDto);
 
         userRepository.save(user);
 
-        return userDto;
+        return AdminUserMapper.INSTANCE.toDto(user);
     }
 
     @Override

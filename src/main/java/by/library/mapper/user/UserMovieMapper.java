@@ -1,6 +1,6 @@
 package by.library.mapper.user;
 
-import by.library.dto.user.UserMovieDto;
+import by.library.dto.user.MovieDtoForUser;
 import by.library.model.Movie;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
@@ -10,6 +10,6 @@ public interface UserMovieMapper {
 
     UserMovieMapper INSTANCE = Mappers.getMapper(UserMovieMapper.class);
 
-    Movie toEntity(UserMovieDto movieDto);
-    UserMovieDto toDto(Movie movie);
+    Movie toEntity(MovieDtoForUser movieDto);
+    MovieDtoForUser toDto(Movie movie);
 }

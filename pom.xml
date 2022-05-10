@@ -15,8 +15,6 @@
         <postgresql.version>42.3.3</postgresql.version>
         <mapstruct.version>1.4.2.Final</mapstruct.version>
         <mapstruct-lombok.version>0.2.0</mapstruct-lombok.version>
-
-
         <maven.compiler.source>15</maven.compiler.source>
         <maven.compiler.target>15</maven.compiler.target>
     </properties>

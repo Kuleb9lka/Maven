@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class AdminTicketDto {
+public class TicketDtoForAdmin {
 
     private Long id;
 

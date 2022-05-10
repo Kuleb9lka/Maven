@@ -1,16 +1,14 @@
 package by.library.service;
 
-import by.library.dto.admin.AdminTicketDto;
-
-import by.library.model.Ticket;
+import by.library.dto.admin.TicketDtoForAdmin;
 
 import java.util.List;
 
 public interface TicketService {
 
-    AdminTicketDto get(Long id);
-    List<AdminTicketDto> getAll();
-    AdminTicketDto create(AdminTicketDto adminTicketDto);
-    AdminTicketDto update(AdminTicketDto adminTicketDto);
+    TicketDtoForAdmin get(Long id);
+    List<TicketDtoForAdmin> getAll();
+    TicketDtoForAdmin create(TicketDtoForAdmin ticketDtoForAdmin);
+    TicketDtoForAdmin update(TicketDtoForAdmin ticketDtoForAdmin);
     void delete(Long id);
 }

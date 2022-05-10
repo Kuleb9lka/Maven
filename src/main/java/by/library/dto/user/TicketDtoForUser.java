@@ -1,18 +1,16 @@
 package by.library.dto.user;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
-
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserMovieDto {
+public class TicketDtoForUser {
 
-    private String name;
+    private int place;
 
-    private LocalDateTime sessionDateTime;
+    private int price;
 }
