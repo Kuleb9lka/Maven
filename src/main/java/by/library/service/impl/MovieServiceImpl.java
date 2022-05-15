@@ -2,8 +2,7 @@ package by.library.service.impl;
 
 import by.library.dto.admin.MovieDtoForAdmin;
 import by.library.exception.MovieNotFoundException;
-import by.library.mapper.admin.AdminMovieMapper;
-import by.library.mapper.list.MovieListMapper;
+import by.library.mapper.AdminMapper;
 import by.library.model.Movie;
 import by.library.repository.MovieRepository;
 import by.library.service.MovieService;
@@ -18,38 +17,40 @@ public class MovieServiceImpl implements MovieService {
 
     private final MovieRepository movieRepository;
 
+    private final AdminMapper adminMapper;
+
     @Override
     public MovieDtoForAdmin get(Long id) {
 
         Movie movie = movieRepository.findById(id).orElseThrow(() -> new MovieNotFoundException("No such movie"));
 
-        return AdminMovieMapper.INSTANCE.toDto(movie);
+        return adminMapper.toMovieDto(movie);
     }
 
     @Override
     public List<MovieDtoForAdmin> getAll() {
 
-        return MovieListMapper.INSTANCE.toDtoList(movieRepository.findAll());
+        return adminMapper.mapToMovieDtoList(movieRepository.findAll());
     }
 
     @Override
     public MovieDtoForAdmin create(MovieDtoForAdmin movieDtoForAdmin) {
 
-        Movie movie = AdminMovieMapper.INSTANCE.toEntity(movieDtoForAdmin);
+        Movie convertMovie = adminMapper.toMovie(movieDtoForAdmin);
 
-        movieRepository.save(movie);
+        Movie movie = movieRepository.save(convertMovie);
 
-        return AdminMovieMapper.INSTANCE.toDto(movie);
+        return adminMapper.toMovieDto(movie);
     }
 
     @Override
     public MovieDtoForAdmin update(MovieDtoForAdmin movieDtoForAdmin) {
 
-        Movie movie = AdminMovieMapper.INSTANCE.toEntity(movieDtoForAdmin);
+        Movie convertMovie = adminMapper.toMovie(movieDtoForAdmin);
 
-        movieRepository.save(movie);
+        Movie movie = movieRepository.save(convertMovie);
 
-        return AdminMovieMapper.INSTANCE.toDto(movie);
+        return adminMapper.toMovieDto(movie);
     }
 
     @Override

@@ -2,8 +2,7 @@ package by.library.service.impl;
 
 import by.library.dto.admin.UserDtoForAdmin;
 import by.library.exception.UserNotFoundException;
-import by.library.mapper.admin.AdminUserMapper;
-import by.library.mapper.list.UserListMapper;
+import by.library.mapper.AdminMapper;
 import by.library.model.User;
 import by.library.repository.UserRepository;
 import by.library.service.UserService;
@@ -18,38 +17,40 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
 
+    private final AdminMapper adminMapper;
+
     @Override
     public UserDtoForAdmin get(Long id) {
 
         User user = userRepository.findById(id).orElseThrow(() -> new UserNotFoundException("No such user"));
 
-        return AdminUserMapper.INSTANCE.toDto(user);
+        return adminMapper.toUserDto(user);
     }
 
     @Override
     public List<UserDtoForAdmin> getAll() {
 
-        return UserListMapper.INSTANCE.toDtoList(userRepository.findAll());
+        return adminMapper.mapToUserDtoList(userRepository.findAll());
     }
 
     @Override
     public UserDtoForAdmin create(UserDtoForAdmin userDto) {
 
-        User user = AdminUserMapper.INSTANCE.toEntity(userDto);
+        User convertUser = adminMapper.toUser(userDto);
 
-        userRepository.save(user);
+        User user = userRepository.save(convertUser);
 
-        return AdminUserMapper.INSTANCE.toDto(user);
+        return adminMapper.toUserDto(user);
     }
 
     @Override
     public UserDtoForAdmin update(UserDtoForAdmin userDto) {
 
-        User user = AdminUserMapper.INSTANCE.toEntity(userDto);
+        User convertUser = adminMapper.toUser(userDto);
 
-        userRepository.save(user);
+        User user = userRepository.save(convertUser);
 
-        return AdminUserMapper.INSTANCE.toDto(user);
+        return adminMapper.toUserDto(user);
     }
 
     @Override

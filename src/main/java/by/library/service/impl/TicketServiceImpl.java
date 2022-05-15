@@ -2,8 +2,7 @@ package by.library.service.impl;
 
 import by.library.dto.admin.TicketDtoForAdmin;
 import by.library.exception.TicketNotFoundException;
-import by.library.mapper.admin.AdminTicketMapper;
-import by.library.mapper.list.TicketListMapper;
+import by.library.mapper.AdminMapper;
 import by.library.model.Ticket;
 import by.library.repository.TicketRepository;
 import by.library.service.TicketService;
@@ -18,38 +17,40 @@ public class TicketServiceImpl implements TicketService {
 
     private final TicketRepository ticketRepository;
 
+    private final AdminMapper adminMapper;
+
     @Override
     public TicketDtoForAdmin get(Long id) {
 
         Ticket ticket = ticketRepository.findById(id).orElseThrow(() -> new TicketNotFoundException("No such ticket"));
 
-        return AdminTicketMapper.INSTANCE.toDto(ticket);
+        return adminMapper.toTicketDto(ticket);
     }
 
     @Override
     public List<TicketDtoForAdmin> getAll() {
 
-        return TicketListMapper.INSTANCE.toDtoList(ticketRepository.findAll());
+        return adminMapper.mapToTicketDtoList(ticketRepository.findAll());
     }
 
     @Override
     public TicketDtoForAdmin create(TicketDtoForAdmin ticketDto) {
 
-        Ticket ticket = AdminTicketMapper.INSTANCE.toEntity(ticketDto);
+        Ticket convertTicket = adminMapper.toTicket(ticketDto);
 
-        ticketRepository.save(ticket);
+        Ticket ticket = ticketRepository.save(convertTicket);
 
-        return AdminTicketMapper.INSTANCE.toDto(ticket);
+        return adminMapper.toTicketDto(ticket);
     }
 
     @Override
     public TicketDtoForAdmin update(TicketDtoForAdmin ticketDto) {
 
-        Ticket ticket = AdminTicketMapper.INSTANCE.toEntity(ticketDto);
+        Ticket convertTicket = adminMapper.toTicket(ticketDto);
 
-        ticketRepository.save(ticket);
+        Ticket ticket = ticketRepository.save(convertTicket);
 
-        return AdminTicketMapper.INSTANCE.toDto(ticket);
+        return adminMapper.toTicketDto(ticket);
     }
 
     @Override
