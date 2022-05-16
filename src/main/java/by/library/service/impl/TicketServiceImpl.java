@@ -1,58 +1,56 @@
 package by.library.service.impl;
 
-
-import by.library.dto.TicketDto;
+import by.library.dto.admin.TicketDtoForAdmin;
+import by.library.exception.TicketNotFoundException;
+import by.library.mapper.AdminMapper;
 import by.library.model.Ticket;
 import by.library.repository.TicketRepository;
 import by.library.service.TicketService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class TicketServiceImpl implements TicketService {
 
     private final TicketRepository ticketRepository;
 
-    public TicketServiceImpl(TicketRepository ticketRepository) {
-        this.ticketRepository = ticketRepository;
+    private final AdminMapper adminMapper;
+
+    @Override
+    public TicketDtoForAdmin get(Long id) {
+
+        Ticket ticket = ticketRepository.findById(id).orElseThrow(() -> new TicketNotFoundException("No such ticket"));
+
+        return adminMapper.toTicketDto(ticket);
     }
 
     @Override
-    public Ticket get(Long id) {
+    public List<TicketDtoForAdmin> getAll() {
 
-        Optional<Ticket> optionalTicket = ticketRepository.findById(id);
-
-        return optionalTicket.get();
+        return adminMapper.mapToTicketDtoList(ticketRepository.findAll());
     }
 
     @Override
-    public List<Ticket> getAll() {
+    public TicketDtoForAdmin create(TicketDtoForAdmin ticketDto) {
 
-        return ticketRepository.findAll();
+        Ticket convertTicket = adminMapper.toTicket(ticketDto);
+
+        Ticket ticket = ticketRepository.save(convertTicket);
+
+        return adminMapper.toTicketDto(ticket);
     }
 
     @Override
-    public Ticket create(TicketDto ticketDto) {
+    public TicketDtoForAdmin update(TicketDtoForAdmin ticketDto) {
 
-        Ticket ticket = new Ticket(ticketDto.getUserId(), ticketDto.getMovieId(),
-                ticketDto.getPlace(), ticketDto.getPrice(), ticketDto.isBought());
+        Ticket convertTicket = adminMapper.toTicket(ticketDto);
 
-        ticketRepository.save(ticket);
+        Ticket ticket = ticketRepository.save(convertTicket);
 
-        return ticket;
-    }
-
-    @Override
-    public Ticket update(TicketDto ticketDto) {
-
-        Ticket ticket = new Ticket(ticketDto.getId(), ticketDto.getUserId(), ticketDto.getMovieId(),
-                ticketDto.getPlace(), ticketDto.getPrice(), ticketDto.isBought());
-
-        ticketRepository.save(ticket);
-
-        return ticket;
+        return adminMapper.toTicketDto(ticket);
     }
 
     @Override

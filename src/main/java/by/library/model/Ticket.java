@@ -1,6 +1,5 @@
 package by.library.model;
 
-import by.library.model.Movie;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,12 +18,12 @@ public class Ticket {
     @Column(name = "id")
     private Long id;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @Column(name = "user_id")
+    @OneToOne
+    @JoinColumn(name = "user_id")
     private User user;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @Column(name = "movie_id")
+    @OneToOne
+    @JoinColumn(name = "movie_id")
     private Movie movie;
 
     @Column(name = "place")
@@ -35,12 +34,4 @@ public class Ticket {
 
     @Column(name = "is_bought")
     private boolean isBought;
-
-    public Ticket(User user, Movie movie, int place, int price, boolean isBought) {
-        this.user = user;
-        this.movie = movie;
-        this.place = place;
-        this.price = price;
-        this.isBought = isBought;
-    }
 }

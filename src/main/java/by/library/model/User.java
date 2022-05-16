@@ -1,9 +1,6 @@
 package by.library.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -28,4 +25,5 @@ public class User implements Serializable {
 
     @Column(name = "role", nullable = false)
     private String role;
+
 }

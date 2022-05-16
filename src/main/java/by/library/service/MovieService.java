@@ -1,15 +1,14 @@
 package by.library.service;
 
-import by.library.dto.MovieDto;
-import by.library.model.Movie;
+import by.library.dto.admin.MovieDtoForAdmin;
 
 import java.util.List;
 
 public interface MovieService {
 
-    Movie get(Long id);
-    List<Movie> getAll();
-    Movie create(MovieDto movie);
-    Movie update(MovieDto movie);
+    MovieDtoForAdmin get(Long id);
+    List<MovieDtoForAdmin> getAll();
+    MovieDtoForAdmin create(MovieDtoForAdmin movieDto);
+    MovieDtoForAdmin update(MovieDtoForAdmin movieDto);
     void delete(Long id);
 }

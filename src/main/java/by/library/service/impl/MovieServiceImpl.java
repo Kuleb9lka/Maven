@@ -1,55 +1,56 @@
 package by.library.service.impl;
 
-import by.library.dto.MovieDto;
+import by.library.dto.admin.MovieDtoForAdmin;
+import by.library.exception.MovieNotFoundException;
+import by.library.mapper.AdminMapper;
 import by.library.model.Movie;
 import by.library.repository.MovieRepository;
 import by.library.service.MovieService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class MovieServiceImpl implements MovieService {
 
     private final MovieRepository movieRepository;
 
-    public MovieServiceImpl(MovieRepository movieRepository) {
-        this.movieRepository = movieRepository;
+    private final AdminMapper adminMapper;
+
+    @Override
+    public MovieDtoForAdmin get(Long id) {
+
+        Movie movie = movieRepository.findById(id).orElseThrow(() -> new MovieNotFoundException("No such movie"));
+
+        return adminMapper.toMovieDto(movie);
     }
 
     @Override
-    public Movie get(Long id) {
+    public List<MovieDtoForAdmin> getAll() {
 
-        Optional<Movie> optionalMovie = movieRepository.findById(id);
-
-        return optionalMovie.get();
+        return adminMapper.mapToMovieDtoList(movieRepository.findAll());
     }
 
     @Override
-    public List<Movie> getAll() {
+    public MovieDtoForAdmin create(MovieDtoForAdmin movieDtoForAdmin) {
 
-        return movieRepository.findAll();
+        Movie convertMovie = adminMapper.toMovie(movieDtoForAdmin);
+
+        Movie movie = movieRepository.save(convertMovie);
+
+        return adminMapper.toMovieDto(movie);
     }
 
     @Override
-    public Movie create(MovieDto movieDto) {
+    public MovieDtoForAdmin update(MovieDtoForAdmin movieDtoForAdmin) {
 
-        Movie movie = new Movie(movieDto.getName(), movieDto.getDateTime());
+        Movie convertMovie = adminMapper.toMovie(movieDtoForAdmin);
 
-        movieRepository.save(movie);
+        Movie movie = movieRepository.save(convertMovie);
 
-        return movie;
-    }
-
-    @Override
-    public Movie update(MovieDto movieDto) {
-
-        Movie movie = new Movie(movieDto.getId(), movieDto.getName(), movieDto.getDateTime());
-
-        movieRepository.save(movie);
-
-        return movie;
+        return adminMapper.toMovieDto(movie);
     }
 
     @Override

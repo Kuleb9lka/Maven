@@ -1,6 +1,6 @@
 server:
   port: 8081
-  servlet: #!!!
+  servlet:
     context-path: /api
 spring:
   mvc:
@@ -8,9 +8,10 @@ spring:
       matching-strategy: ant_path_matcher
 
   jpa:
+    open-in-view: true
     show-sql: true
     hibernate:
-      ddl-auto:  #!!!validate
+      ddl-auto: none
     properties:
       dialect: dialect=org.hibernate.dialect.SQLServerDialect
 

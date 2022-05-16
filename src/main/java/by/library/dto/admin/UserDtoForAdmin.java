@@ -1,19 +1,17 @@
-package by.library.dto;
+package by.library.dto.admin;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class MovieDto {
+public class UserDtoForAdmin {
 
     private Long id;
 
-    private String name;
+    private String login;
 
-    private LocalDateTime dateTime;
+    private String role;
 }

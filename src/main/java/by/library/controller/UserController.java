@@ -1,34 +1,46 @@
 package by.library.controller;
 
-import by.library.model.User;
-import by.library.repository.UserRepository;
+import by.library.dto.admin.UserDtoForAdmin;
+import by.library.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/users")
 public class UserController {
 
-    private final UserRepository userRepository;
-
     @Autowired
-    public UserController(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
+    private UserServiceImpl userService;
 
     @GetMapping
-    public List<User> allUsers() {
+    public List<UserDtoForAdmin> getAll(){
 
-        Optional<User> optionalUser = userRepository.findByLogin("bogdan");
+        return userService.getAll();
+    }
 
-        if (optionalUser.isPresent()) {
+    @GetMapping("/{id}")
+    public UserDtoForAdmin get(@PathVariable Long id){
 
-            User user = optionalUser.get();
-        }
+        return userService.get(id);
+    }
 
-        return userRepository.findAll();
+    @PostMapping
+    public UserDtoForAdmin create(@RequestBody UserDtoForAdmin userDto) {
+
+        return userService.create(userDto);
+    }
+
+    @PutMapping
+    public UserDtoForAdmin update(@RequestBody UserDtoForAdmin userDto){
+
+        return userService.update(userDto);
+    }
+
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Long id){
+
+        userService.delete(id);
     }
 }
