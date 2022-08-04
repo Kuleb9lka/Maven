@@ -15,11 +15,10 @@ public class SpringFoxConfig {
     @Bean
     public Docket docket() {
 
-        return new Docket(DocumentationType.OAS_30)
+        return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(new ApiInfoBuilder()
-                        .title("ITech Lib API")
-                        .description("API for the booking books automation process")
-                        .version("0.0.1-SNAPSHOT")
+                        .title("Cinema")
+                        .description("Online cinema")
                         .build())
                 .select()
                 .apis(RequestHandlerSelectors.withClassAnnotation(RestController.class))

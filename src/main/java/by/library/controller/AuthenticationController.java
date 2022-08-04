@@ -1,18 +1,25 @@
 package by.library.controller;
 
-
-import by.library.dto.AuthenticationDto;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
-@RestController
-@RequestMapping("/login")
+@Controller
+@RequestMapping("/auth")
 public class AuthenticationController {
 
-    @GetMapping
-    public AuthenticationDto login(AuthenticationDto authenticationDto){
+    @GetMapping("/login")
+    public String getLoginPage(){
+        return "login";
+    }
 
-        return authenticationDto;
+    @GetMapping("/home")
+    public String getHomePage(){
+        return "home";
+    }
+
+    @GetMapping("/success")
+    public String getSuccessPage(){
+        return "success";
     }
 }

@@ -1,8 +1,11 @@
 package by.library.dto.admin;
 
+import by.library.model.Role;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.Set;
 
 @Data
 @NoArgsConstructor
@@ -13,5 +16,5 @@ public class UserDtoForAdmin {
 
     private String login;
 
-    private String role;
+    private Set<Role> roles;
 }
