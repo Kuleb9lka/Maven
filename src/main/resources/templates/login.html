@@ -1,0 +1,24 @@
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Login</title>
+</head>
+<body>
+<div class="container">
+    <form class="form-singin" method="post" action="/api/auth/login">
+        <h2 class="form-singin-heading">Login</h2>
+        <p>
+            <lable for="username">Login</lable>
+            <input type="text" id="username" name="username" class="form-control" placeholder="Login" required>
+        </p>
+
+        <p>
+            <lable for="password">Password</lable>
+            <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
+        </p>
+
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+    </form>
+</div>
+</body>
+</html>

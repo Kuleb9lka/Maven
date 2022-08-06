@@ -1,14 +1,13 @@
 package by.library;
 
-import by.library.user.User;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+@SpringBootApplication
 public class Main {
 
     public static void main(String[] args) {
 
-        User user = new User();
-        user.setAge(14);
-
-        System.out.println(user.getAge());
+        SpringApplication.run(Main.class, args);
     }
 }
