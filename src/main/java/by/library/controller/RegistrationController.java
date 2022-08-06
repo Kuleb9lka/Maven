@@ -16,22 +16,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@RequestMapping("/reg")
+@RequestMapping("/registration")
 public class RegistrationController {
 
     @Autowired
     private RegistrationUserServiceImpl registrationUserServiceImpl;
 
-    private ModelAndView mav;
+    private ModelAndView modelAndView;
 
-    @GetMapping("/registration")
+    @GetMapping("/reg-new-acc")
     public String showRegistrationForm(Model model) {
         RegistrationUserDto userDto = new RegistrationUserDto();
         model.addAttribute("user", userDto);
         return "registration";
     }
 
-    @PostMapping("/registration")
+    @PostMapping("/reg-new-acc")
     public ModelAndView registerUserAccount(
             @ModelAttribute("user") @Validated RegistrationUserDto userDto, BindingResult bindingResult){
 
@@ -45,9 +45,9 @@ public class RegistrationController {
 
         } catch (UserIsAlreadyExistException uaeEx) {
 
-            mav.addObject("message", "An account for that username/email already exists.");
+            modelAndView.addObject("message", "An account for that username/email already exists.");
 
-            return mav;
+            return modelAndView;
         }
 
         return new ModelAndView("success", "user", userDto);

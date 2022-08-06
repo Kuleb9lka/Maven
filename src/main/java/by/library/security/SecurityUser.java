@@ -63,7 +63,7 @@ public class SecurityUser implements UserDetails {
         return isActive;
     }
 
-    public static Set<SimpleGrantedAuthority> getAuthority(Set<Role> roles) {
+    private static Set<SimpleGrantedAuthority> getAuthority(Set<Role> roles) {
 
         return roles.stream().map(role -> new SimpleGrantedAuthority(role.getRoleName()))
                 .collect(Collectors.toSet());

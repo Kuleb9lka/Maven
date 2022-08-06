@@ -13,7 +13,6 @@ import java.util.Set;
 @AllArgsConstructor
 public class RegistrationUserDto {
 
-
     private String login;
 
     private String password;
